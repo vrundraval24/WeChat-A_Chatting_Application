@@ -58,6 +58,8 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        // resizeToAvoidBottomInset: true,
+
         appBar: AppBar(
           toolbarHeight: 70,
           automaticallyImplyLeading: false,
@@ -84,17 +86,19 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
 
                         if (_list.isNotEmpty) {
 
-                          SchedulerBinding.instance.addPostFrameCallback((_) {
-                            _scrollController.jumpTo(
-                              _scrollController.position.maxScrollExtent,
-                            );
-                          });
-
                           return ListView.builder(
                             controller:
                                 _scrollController, // Attach the ScrollController
 
                             itemBuilder: (context, index) {
+
+
+                              WidgetsBinding.instance.addPostFrameCallback((_) {
+                                _scrollController.jumpTo(
+                                  _scrollController.position.maxScrollExtent,
+                                );
+                              });
+
                               if (index == 0) {
                                 return MessageCard(
                                   message: _list[index],
@@ -110,10 +114,15 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
                                   isLastMsgFromIdSame: _list[index].fromId ==
                                       _list[index - 1].fromId);
                             },
+
+
                             itemCount: _list.length,
                             padding: EdgeInsets.only(top: mq.height * .01),
                             physics: const BouncingScrollPhysics(),
                           );
+
+
+
                         } else {
                           return const Center(
                               child: Text(

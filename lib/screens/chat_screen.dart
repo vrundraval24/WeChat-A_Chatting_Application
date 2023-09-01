@@ -86,18 +86,21 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
 
                         if (_list.isNotEmpty) {
 
+
+
+                          // The scrolling behaviour still needs lots of improvement
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            _scrollController.jumpTo(
+                              _scrollController.position.maxScrollExtent,
+                            );
+                          });
+
+
                           return ListView.builder(
                             controller:
                                 _scrollController, // Attach the ScrollController
 
                             itemBuilder: (context, index) {
-
-
-                              WidgetsBinding.instance.addPostFrameCallback((_) {
-                                _scrollController.jumpTo(
-                                  _scrollController.position.maxScrollExtent,
-                                );
-                              });
 
                               if (index == 0) {
                                 return MessageCard(

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -38,7 +39,7 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
   @override
   void didChangeMetrics() {
     super.didChangeMetrics();
-    if (_scrollController.hasClients) {
+    if ((_scrollController.position.pixels > _scrollController.position.maxScrollExtent - 200) && _scrollController.hasClients) {
       _scrollController.jumpTo(
         _scrollController.position.maxScrollExtent,
       );
@@ -54,11 +55,15 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
   // For auto scrolling to bottom
   final ScrollController _scrollController = ScrollController();
 
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         // resizeToAvoidBottomInset: true,
+        // backgroundColor: const Color(0xfff0f2f7),
+
+        backgroundColor: const Color(0xfff5f6f8),
 
         appBar: AppBar(
           toolbarHeight: 70,
@@ -90,10 +95,38 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
 
                           // The scrolling behaviour still needs lots of improvement
                           WidgetsBinding.instance.addPostFrameCallback((_) {
-                            _scrollController.jumpTo(
-                              _scrollController.position.maxScrollExtent,
-                            );
+                            _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+                            // _scrollController.animateTo(
+                            //   _scrollController.position.maxScrollExtent, duration: const Duration(milliseconds: 400), curve: Curves.easeInOut
+                            // );
                           });
+
+                          // WidgetsBinding.instance.addPostFrameCallback((_) {
+                          //   Scrollable.ensureVisible(_lastMsg.currentContext!, duration: const Duration(milliseconds: 5000), curve: Curves.easeInOut);
+                          // });
+
+                          Timer(const Duration(milliseconds: 500), () {
+                            _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+
+                            // _scrollController.animateTo(
+                            //     _scrollController.position.maxScrollExtent, duration: const Duration(milliseconds: 10000), curve: Curves.easeInOut
+                            // );
+                          });
+
+
+
+                          // WidgetsBinding.instance.addPostFrameCallback((_) {
+                          //   // Your code here will run after the current frame is painted.
+                          //   if (_scrollController.hasClients) {
+                          //     _scrollController.animateTo(
+                          //       _scrollController.position.maxScrollExtent,
+                          //       duration: const Duration(milliseconds: 300),
+                          //       curve: Curves.easeInOut,
+                          //     );
+                          //   }
+                          // });
+
+
 
 
                           return ListView.builder(
@@ -201,10 +234,15 @@ class _ChatScreenState extends State<ChatScreen> with WidgetsBindingObserver {
   }
 
   Widget _chatInputField() {
+
     _textController.addListener(() {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
-      });
+      // print(_scrollController.position.pixels);
+      // print(_scrollController.position.maxScrollExtent);
+      if(_scrollController.position.pixels > _scrollController.position.maxScrollExtent - 50){
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+        });
+      }
     });
 
     return Padding(

@@ -93,23 +93,24 @@ class _MessageCardState extends State<MessageCard> {
                     padding: const EdgeInsets.only(
                         top: 7, bottom: 7, right: 24, left: 10),
                     margin: EdgeInsets.only(top: !widget.isLastMsgFromIdSame && !dateTitle ? 10 : 1, bottom: 1, left: 13, right: 13),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         // boxShadow: [
                         //   BoxShadow(
                         //     color: Colors.black.withOpacity(0.2), // Shadow color
-                        //     spreadRadius: 1, // Spread radius
-                        //     blurRadius: 3, // Blur radius
-                        //     offset: const Offset(1, 3), // Offset in x and y direction
+                        //     // spreadRadius: 1, // Spread radius
+                        //     // blurRadius: 10, // Blur radius
+                        //     // offset: const Offset(1, 3), // Offset in x and y direction
                         //   ),
                         // ],
-                        border: Border.all(
-                          color: Colors.black, // Border color
-                        ),
+                        // border: Border.all(
+                        //   color: Colors.black, // Border color
+                        // ),
                         color: Colors.white,
-                        borderRadius: const BorderRadius.only(
+                        borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(12),
                                 bottomLeft: Radius.circular(12),
-                                bottomRight: Radius.circular(12))),
+                                bottomRight: Radius.circular(12))
+                    ),
                     child: Text(widget.message.msg,
                         style:
                             const TextStyle(color: Colors.black, fontSize: 16)),
@@ -199,22 +200,23 @@ class _MessageCardState extends State<MessageCard> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 7, horizontal: 10),
                 margin: EdgeInsets.only(bottom: 1, top: !widget.isLastMsgFromIdSame && !dateTitle ? 10 : 1, left: 13, right: 13),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
 
                     // boxShadow: [
                     //   BoxShadow(
                     //     color: Colors.black.withOpacity(0.2), // Shadow color
-                    //     spreadRadius: 1, // Spread radius
-                    //     blurRadius: 3, // Blur radius
-                    //     offset: const Offset(-1, 3), // Offset in x and y direction
+                    //     // spreadRadius: 1, // Spread radius
+                    //     // blurRadius: 20, // Blur radius
+                    //     // offset: const Offset(-1, 3), // Offset in x and y direction
                     //   ),
                     // ],
 
-                    border: Border.all(
-                      color: Colors.black, // Border color
-                    ),
+                    // border: Border.all(
+                    //   color: Colors.black, // Border color
+                    // ),
+
                     color: Colors.black,
-                    borderRadius: const BorderRadius.only(
+                    borderRadius: BorderRadius.only(
                             topRight: Radius.circular(12),
                             bottomLeft: Radius.circular(12),
                             bottomRight: Radius.circular(12))),

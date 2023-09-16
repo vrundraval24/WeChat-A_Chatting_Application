@@ -17,12 +17,12 @@ void main() {
   _initializeFirebase();
 
   // To open the splash screen in full screen
-  // SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
   // Set the status bar color to match the AppBar color
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent, // Set this to your desired color
-    statusBarIconBrightness: Brightness.light, // Set the brightness of the status bar icons
+    statusBarIconBrightness: Brightness.dark, // Set the brightness of the status bar icons
   ));
 
   // Setting orientation to portrait only and to handle glitches we first completely set orientation and THEN run any other code
@@ -52,15 +52,15 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
             iconTheme: IconThemeData(color: Colors.white),
             elevation: 0,
-            titleTextStyle: TextStyle(
+            titleTextStyle: TextStyle(letterSpacing: 1,
                 color: Colors.white,
                 fontSize: 21,
-                fontWeight: FontWeight.normal),
+                fontWeight: FontWeight.w500),
             backgroundColor: Colors.black),
 
-        //
         // colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
-        // useMaterial3: true,
+
+        useMaterial3: true,
       ),
       home: const SplashScreen(),
     );
